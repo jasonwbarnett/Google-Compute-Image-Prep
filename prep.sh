@@ -19,7 +19,7 @@ sudo sed -i -e '/^server/d' /etc/ntp.conf ## Removes all previously defined `ser
 echo 'server metadata.google.internal' | sudo tee -a /etc/ntp.conf
 
 # Log syslog messages to /dev/ttyS0, so you can debug with gcutil getserialportoutput
-sudo cat > /etc/init/ttyS0.conf <<EOF
+cat <<EOF | sudo tee /etc/init/ttyS0.conf
 # ttyS0 - getty
 start on stopped rc or RUNLEVEL=[2345]
 stop on runlevel [!2345]
@@ -32,7 +32,7 @@ sudo sed -i 's/^#GRUB_TERMINAL=console/GRUB_TERMINAL=console/' /etc/default/grub
 
 
 # Add Required Linux Kernel Options
-sudo cat >> /etc/default/grub <<EOF
+cat <<EOF | sudo tee -a /etc/default/grub
 
 # to enable paravirtualization functionality.
 CONFIG_KVM_GUEST=y
@@ -56,7 +56,7 @@ sudo /usr/sbin/update-grub2
 
 
 # Disable IPv6
-sudo cat > /etc/sysctl.d/11-disable-ipv6.conf <<EOF
+cat <<EOF | sudo tee /etc/sysctl.d/11-disable-ipv6.conf
 net.ipv6.conf.all.disable_ipv6=1
 net.ipv6.conf.default.disable_ipv6=1
 net.ipv6.conf.lo.disable_ipv6=1
@@ -65,7 +65,7 @@ EOF
 
 # Removing hostname, adding internal hosts
 sudo rm /etc/hostname
-sudo cat > /etc/hosts <<EOF
+cat <<EOF | sudo tee /etc/hosts
 127.0.0.1 localhost
 169.254.169.254 metadata.google.internal metadata
 EOF
@@ -102,7 +102,7 @@ sudo rm -f /etc/ssh/ssh_host_*_key*
 sudo sed -r -i -e "s/#?PermitRootLogin without-password/PermitRootLogin no/g" /etc/ssh/sshd_config
 sudo sed -r -i -e "s/#?PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
 sudo sed -r -i -e "s/#?X11Forwarding yes/X11Forwarding no/g" /etc/ssh/sshd_config
-sudo cat >> /etc/ssh/sshd_config <<EOF
+cat <<EOF | sudo tee -a /etc/ssh/sshd_config
 PermitTunnel no
 AllowTcpForwarding yes
 ClientAliveInterval 420
@@ -110,7 +110,7 @@ UseDNS no
 EOF
 echo "GOOGLE" | sudo tee /etc/ssh/sshd_not_to_be_run
 
-sudo cat > /etc/ssh/ssh_config <<EOF
+cat <<EOF | sudo tee /etc/ssh/ssh_config
 Host *
 Protocol 2
 ForwardAgent no
@@ -135,7 +135,7 @@ echo 1 | sudo tee > /proc/sys/kernel/modules_disabled
 sudo rm /boot/System.map*
 
 # Fix sysctl values
-sudo cat > /etc/sysctl.d/12-gce-strongly-recommended.conf <<EOF
+cat <<EOF | sudo tee /etc/sysctl.d/12-gce-strongly-recommended.conf
 # enables syn flood protection
 net.ipv4.tcp_syncookies = 1
 
@@ -194,7 +194,7 @@ net.ipv4.tcp_rfc1337 = 1
 kernel.randomize_va_space = 2
 EOF
 
-sudo cat > /etc/sysctl.d/13-gce-recommended.conf <<EOF
+cat <<EOF | sudo tee /etc/sysctl.d/13-gce-recommended.conf
 # provides protection from ToCToU races
 fs.protected_hardlinks=1
 
@@ -213,7 +213,7 @@ EOF
 
 
 # Upstart scripts
-cat >> /etc/init/prep-set-hostname.conf <<EOF
+cat <<EOF | sudo tee /etc/init/prep-set-hostname.conf
 start on (starting ssh or starting sshd)
 
 # this is a task, so only run once
@@ -225,7 +225,7 @@ script
 end script
 EOF
 
-cat >>/etc/init/prep-remove-bootstrap.conf <<EOF
+cat <<EOF | sudo tee /etc/init/prep-remove-bootstrap.conf
 start on (starting ssh or starting sshd)
 
 # this is a task, so only run once
@@ -239,3 +239,4 @@ end script
 EOF
 
 initctl reload-configuration
+
