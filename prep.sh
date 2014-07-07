@@ -238,5 +238,6 @@ script
 end script
 EOF
 
-initctl reload-configuration
+sudo initctl reload-configuration
+sudo update-rc.d ssh defaults
 
