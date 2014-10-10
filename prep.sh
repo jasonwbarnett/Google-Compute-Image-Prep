@@ -18,7 +18,7 @@ sudo ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 sudo sed -i -e '/^server/d' /etc/ntp.conf ## Removes all previously defined `server` statements.
 echo 'server metadata.google.internal' | sudo tee -a /etc/ntp.conf
 
-# Log syslog messages to /dev/ttyS0, so you can debug with gcutil getserialportoutput
+# Log syslog messages to /dev/ttyS0, so you can debug with $ gcloud compute instances get-serial-port-output
 cat <<EOF | sudo tee /etc/init/ttyS0.conf
 # ttyS0 - getty
 start on stopped rc or RUNLEVEL=[2345]
