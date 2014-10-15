@@ -6,6 +6,10 @@ image that worked on Google Compute Engine.
 
 If anyone ever gets this working, please let me know.
 
+## Dependencies
+
+1. The script assumes you're using a linux user `bootstrap`. On lines [line 228-239][1] we create a task to remove the user on boot.
+
 ## Contributing
 
 1. Fork it ( https://github.com/jasonwbarnett/Google-Compute-Image-Prep/fork )
@@ -13,3 +17,6 @@ If anyone ever gets this working, please let me know.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+
+[1]: https://github.com/jasonwbarnett/Google-Compute-Image-Prep/blob/master/prep.sh#L228-L239
