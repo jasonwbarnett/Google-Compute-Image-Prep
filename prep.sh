@@ -73,13 +73,13 @@ EOF
 
 # Install GCE specific software
 wget -q https://github.com/GoogleCloudPlatform/compute-image-packages/releases/download/1.1.6/google-startup-scripts_1.1.6-1_all.deb
-sudo dpkg -i google-startup-scripts_1.1.4-1_all.deb
+sudo dpkg -i google-startup-scripts_1.1.6-1_all.deb
 sudo apt-get install -f -yq
-wget -q https://github.com/GoogleCloudPlatform/compute-image-packages/releases/download/1.1.4/python-gcimagebundle_1.1.6-1_all.deb
-sudo dpkg -i python-gcimagebundle_1.1.4-1_all.deb
+wget -q https://github.com/GoogleCloudPlatform/compute-image-packages/releases/download/1.1.6/python-gcimagebundle_1.1.6-1_all.deb
+sudo dpkg -i python-gcimagebundle_1.1.6-1_all.deb
 sudo apt-get install -f -yq
-wget -q https://github.com/GoogleCloudPlatform/compute-image-packages/releases/download/1.1.4/google-compute-daemon_1.1.6-1_all.deb
-sudo dpkg -i google-compute-daemon_1.1.4-1_all.deb
+wget -q https://github.com/GoogleCloudPlatform/compute-image-packages/releases/download/1.1.6/google-compute-daemon_1.1.6-1_all.deb
+sudo dpkg -i google-compute-daemon_1.1.6-1_all.deb
 sudo apt-get install -f -yq
 
 
