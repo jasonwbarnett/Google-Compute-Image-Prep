@@ -8,7 +8,7 @@ If anyone ever gets this working, please let me know.
 
 ## Dependencies
 
-1. The script assumes you're using a linux user `bootstrap`. On lines [line 228-239][1] we create a task to remove the user on boot.
+1. The script assumes you're using a linux user `bootstrap`. On [lines 228-239][1] we create a task to remove the user on boot.
 
 ## Contributing
 
